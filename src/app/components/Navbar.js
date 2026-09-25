@@ -3,9 +3,26 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Navbar({ planCount = 0, savedCount = 0 }) {
   const pathname = usePathname();
+  const [counts, setCounts] = useState({ plan: planCount, saved: savedCount });
+
+  useEffect(() => {
+    const updateCounts = () => {
+      const readCount = (key) => JSON.parse(localStorage.getItem(key) || "[]").length;
+      setCounts({ plan: readCount("fitlog-plan"), saved: readCount("fitlog-saved") });
+    };
+
+    updateCounts();
+    window.addEventListener("storage", updateCounts);
+    window.addEventListener("fitlog-storage-update", updateCounts);
+    return () => {
+      window.removeEventListener("storage", updateCounts);
+      window.removeEventListener("fitlog-storage-update", updateCounts);
+    };
+  }, []);
 
   const isActive = (path) => pathname === path;
 
@@ -58,13 +75,13 @@ export default function Navbar({ planCount = 0, savedCount = 0 }) {
           {/* Plan */}
           <div className="flex items-center gap-2 rounded-full bg-[#ccff00] px-4 py-2 text-sm font-bold text-black">
             <span>Plan</span>
-            <span>{planCount}</span>
+            <span>{counts.plan}</span>
           </div>
 
           {/* Saved */}
           <div className="flex items-center gap-2 rounded-full border border-[#ccff00] px-4 py-2 text-sm font-bold text-white">
             <span>Saved</span>
-            <span>{savedCount}</span>
+            <span>{counts.saved}</span>
           </div>
 
         </div>

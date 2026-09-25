@@ -9,12 +9,12 @@ export default function WorkoutCard({ workout }) {
       className="group block overflow-hidden rounded-2xl border border-gray-800 bg-[#111] transition duration-300 hover:-translate-y-1 hover:border-[#ccff00]"
     >
       {/* Image */}
-      <div className="relative h-79 w-full overflow-hidden bg-gray-900">
+      <div className="relative h-88 w-full overflow-hidden bg-gray-900 sm:h-80">
         <Image
           src={workout.image}
           alt={workout.name}
           fill
-          className="object-cover transition duration-500 group-hover:scale-105"
+          className="object-contain p-3 transition duration-500 group-hover:scale-105"
         />
       </div>
 
@@ -33,7 +33,7 @@ export default function WorkoutCard({ workout }) {
         </div>
 
         {/* Workout Name */}
-        <h3 className="mt-4 text-xl font-black uppercase text-white">
+        <h3 className="mt-4 text-lg font-black uppercase leading-tight text-white">
           {workout.name}
         </h3>
 
@@ -43,7 +43,7 @@ export default function WorkoutCard({ workout }) {
         </p>
 
         {/* Stats */}
-        <div className="mt-5 flex items-center justify-between border-t border-gray-800 pt-4 text-sm text-gray-400">
+        <div className="mt-5 flex items-center justify-between border-t border-gray-800 pt-4 text-xs text-gray-400">
 
           <span className="flex items-center gap-1">
             ⏱️ {workout.duration} min

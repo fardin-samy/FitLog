@@ -28,13 +28,13 @@ export default async function Home() {
             WORKOUT LIBRARY
           </p>
 
-          <h1 className="text-5xl font-black uppercase leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl">
+          <h1 className="text-4xl font-black uppercase leading-[0.95] tracking-tight sm:text-5xl lg:text-6xl">
             TRAIN WITH INTENT.
             <br />
             LOG EVERY SET.
           </h1>
 
-          <p className="mt-7 max-w-xl text-base leading-7 text-gray-400 sm:text-lg">
+          <p className="mt-7 max-w-xl text-sm leading-7 text-gray-400 sm:text-base">
             FitLog is a dark, no-nonsense gym companion: pick a lift,
             lock it into today&apos;s plan, and watch the week&apos;s work add up.
           </p>
@@ -49,13 +49,13 @@ export default async function Home() {
         </div>
 
         {/* Right */}
-        <div className="relative h-[620px] overflow-hidden rounded-2xl">
+        <div className="relative h-[680px] overflow-hidden rounded-2xl">
           <Image
             src="/banner.png"
             alt="FitLog workout"
             fill
             priority
-            className="object-cover p-20"
+            className="object-contain p-16 sm:p-20"
           />
         </div>
 
