@@ -1,11 +1,10 @@
-import Navbar from "./components/Navbar";
 import "./globals.css";
-
+import Navbar from "./components/Navbar";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Navbar planCount={0} savedCount={0} />
+        <Navbar/>
         {children}
       </body>
     </html>

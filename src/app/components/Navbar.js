@@ -16,15 +16,15 @@ export default function Navbar({ planCount = 0, savedCount = 0 }) {
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center text-2xl font-black uppercase tracking-tight text-white"
+          className="flex items-center text-xl font-black uppercase tracking-tight text-white"
         >
           <Image
             src="/logo.png"
             alt="Fitlog logo"
-            width={40}
-            height={40}
+            width={34}
+            height={34}
           />
-          <span className="p-2">FitLog</span>
+          <span className="ml-1">FitLog</span>
         </Link>
 
         {/* Navigation Links */}
