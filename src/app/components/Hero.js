@@ -1,5 +1,5 @@
 import Image from "next/image";
-import WorkoutCard from "./WorkoutCard";
+import WorkoutLibrary from "./WorkoutLibrary";
 
 const API_URL = "https://api.abcz.workers.dev/api/fitlog";
 
@@ -68,30 +68,7 @@ export default async function Home() {
         className="mx-auto max-w-7xl scroll-mt-20 px-6 pb-24 pt-8"
       >
 
-        {/* Heading */}
-        <div className="mb-12">
-          <p className="text-sm font-bold tracking-[0.25em] text-[#ccff00]">
-            WORKOUTS
-          </p>
-
-          <h2 className="mt-3 text-4xl font-black uppercase sm:text-5xl">
-            The Library
-          </h2>
-
-          <p className="mt-3 text-gray-400">
-            Twelve lifts covering every major muscle group.
-          </p>
-        </div>
-
-        {/* Workout Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {workouts.map((workout) => (
-            <WorkoutCard
-              key={workout.id}
-              workout={workout}
-            />
-          ))}
-        </div>
+        <WorkoutLibrary workouts={workouts} />
 
       </section>
     </main>
