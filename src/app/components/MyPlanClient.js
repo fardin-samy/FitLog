@@ -84,6 +84,7 @@ function WorkoutList({ workouts, onRemove, onMarkDone }) {
             disabled={workout.completed}
             className="inline-flex rounded-full border border-white/20 px-4 py-2 text-xs font-black uppercase tracking-wide text-white hover:border-[#ccff00] disabled:cursor-default disabled:border-[#ccff00]/40 disabled:text-[#ccff00]/60"
           >
+            <span aria-hidden="true">✓</span>
             {workout.completed ? "Done" : "Mark as Done"}
           </button>
         )}
@@ -105,6 +106,7 @@ export default function MyPlanClient() {
   const [saved, setSaved] = useState([]);
   const [activeTab, setActiveTab] = useState("plan");
   const [loading, setLoading] = useState(true);
+  const [toast, setToast] = useState("");
 
   useEffect(() => {
     const update = () => {
@@ -122,9 +124,20 @@ export default function MyPlanClient() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!toast) return undefined;
+
+    const timeout = window.setTimeout(() => setToast(""), 3000);
+    return () => window.clearTimeout(timeout);
+  }, [toast]);
+
   const updateStorage = (key, nextWorkouts) => {
     localStorage.setItem(key, JSON.stringify(nextWorkouts));
     window.dispatchEvent(new Event("fitlog-storage-update"));
+  };
+
+  const showToast = (message) => {
+    setToast(message);
   };
 
   const removeWorkout = (key, id) => {
@@ -132,6 +145,7 @@ export default function MyPlanClient() {
     updateStorage(key, nextWorkouts);
     if (key === "fitlog-plan") setPlan(nextWorkouts);
     if (key === "fitlog-saved") setSaved(nextWorkouts);
+    showToast(key === "fitlog-plan" ? "Removed from today's plan" : "Removed from saved");
   };
 
   const markPlanWorkoutDone = (id) => {
@@ -140,6 +154,7 @@ export default function MyPlanClient() {
     ));
     updateStorage("fitlog-plan", nextPlan);
     setPlan(nextPlan);
+    showToast("Marked as done");
   };
 
   const metrics = plan.reduce(
@@ -204,6 +219,15 @@ export default function MyPlanClient() {
           )}
         </section>
       </div>
+      {toast && (
+        <div
+          className="pointer-events-none fixed right-4 top-24 z-[100] rounded-full border border-[#ccff00] bg-[#ccff00] px-5 py-3 text-sm font-bold text-black shadow-2xl"
+          role="alert"
+          aria-live="assertive"
+        >
+          {toast}
+        </div>
+      )}
     </main>
   );
 }
