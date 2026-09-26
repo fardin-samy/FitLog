@@ -44,6 +44,7 @@ function WorkoutList({ workouts, emptyMessage }) {
 export default function MyPlanClient() {
   const [plan, setPlan] = useState([]);
   const [saved, setSaved] = useState([]);
+  const [activeTab, setActiveTab] = useState("plan");
 
   useEffect(() => {
     const update = () => {
@@ -63,17 +64,39 @@ export default function MyPlanClient() {
   return (
     <main className="min-h-screen bg-black px-6 py-16 text-white sm:px-10 lg:px-12">
       <div className="mx-auto max-w-7xl">
-        
         <h1 className="mt-3 text-4xl font-black uppercase sm:text-6xl">My Plan</h1>
 
-        <section className="mt-12">
-          <h2 className="mb-5 text-2xl font-black uppercase">Today&apos;s Plan</h2>
-          <WorkoutList workouts={plan} emptyMessage="Your plan is empty. Add a workout from the library." />
-        </section>
+        <div className="mt-12 border-b border-white/10" role="tablist" aria-label="Workout lists">
+          {[
+            ["plan", "Today's Plan"],
+            ["saved", "Saved For Later"],
+          ].map(([tab, label]) => (
+            <button
+              key={tab}
+              type="button"
+              role="tab"
+              aria-selected={activeTab === tab}
+              onClick={() => setActiveTab(tab)}
+              className={`mr-6 border-b-2 px-1 pb-4 text-sm font-black uppercase tracking-wide transition ${
+                activeTab === tab
+                  ? "border-[#ccff00] text-[#ccff00]"
+                  : "border-transparent text-gray-500 hover:text-white"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
 
-        <section className="mt-14">
-          <h2 className="mb-5 text-2xl font-black uppercase">Saved For Later</h2>
-          <WorkoutList workouts={saved} emptyMessage="Nothing saved yet." />
+        <section className="mt-8" role="tabpanel">
+          <WorkoutList
+            workouts={activeTab === "plan" ? plan : saved}
+            emptyMessage={
+              activeTab === "plan"
+                ? "Your plan is empty. Add a workout from the library."
+                : "Nothing saved yet."
+            }
+          />
         </section>
       </div>
     </main>

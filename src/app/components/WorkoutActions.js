@@ -46,9 +46,15 @@ export default function WorkoutActions({ workout }) {
           Save for later
         </button>
       </div>
-      <p className="mt-3 min-h-5 text-sm font-semibold text-[#ccff00]" role="status">
-        {message}
-      </p>
+      {message && (
+        <p
+          className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full border border-[#ccff00] bg-[#ccff00] px-5 py-3 text-sm font-bold text-black shadow-2xl"
+          role="status"
+          aria-live="polite"
+        >
+          {message}
+        </p>
+      )}
     </div>
   );
 }
