@@ -20,7 +20,7 @@ export default async function Home() {
     <main className="bg-black text-white">
 
       {/* ================= HERO ================= */}
-      <section className="mx-auto grid min-h-[calc(100vh-80px)] max-w-7xl items-center gap-12 px-6 py-16 lg:grid-cols-2">
+      <section className="mx-auto grid min-h-[calc(100vh-80px)] max-w-7xl items-center gap-12 px-6 pb-8 pt-16 lg:grid-cols-2">
 
         {/* Left */}
         <div className="max-w-2xl">
@@ -55,6 +55,7 @@ export default async function Home() {
             alt="FitLog workout"
             fill
             priority
+            sizes="(max-width: 1023px) 100vw, 50vw"
             className="object-contain p-16 sm:p-20"
           />
         </div>
@@ -64,7 +65,7 @@ export default async function Home() {
       {/* ================= LIBRARY ================= */}
       <section
         id="library"
-        className="mx-auto max-w-7xl scroll-mt-20 px-6 py-24"
+        className="mx-auto max-w-7xl scroll-mt-20 px-6 pb-24 pt-8"
       >
 
         {/* Heading */}

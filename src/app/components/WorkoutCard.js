@@ -14,6 +14,7 @@ export default function WorkoutCard({ workout }) {
           src={workout.image}
           alt={workout.name}
           fill
+          sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
           className="object-contain p-3 transition duration-500 group-hover:scale-105"
         />
       </div>
